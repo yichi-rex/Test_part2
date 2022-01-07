@@ -28,9 +28,9 @@ public class PriceProblem{
         return result;
     }
 
-    public String readCategory(){
-        System.out.println();
-    }
+    //public String readCategory(){
+    //    System.out.println();
+    //}
 
     public void run(){
         Scanner sc = new Scanner(System.in);
