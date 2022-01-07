@@ -1,3 +1,4 @@
+package Test_Part2;
 import java.util.Scanner;
 
 public class PriceProblem{
