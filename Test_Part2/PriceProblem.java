@@ -2,15 +2,15 @@ package Test_Part2;
 import java.util.Scanner;
 
 public class PriceProblem{
-    
+    public static Scanner sc = new Scanner(System.in);
     public double calculate(Productions e){
         double result = 0;
         double type = 0;
-        String cate = e.getCategory();
+        String category = e.getCategory();
 
-        cate = cate.toLowerCase();
+        category = category.toLowerCase();
 
-        switch (cate){
+        switch (category){
             case "food":
                 type = 1.13;
                 break;
@@ -28,27 +28,43 @@ public class PriceProblem{
         return result;
     }
 
-    //public String readCategory(){
-    //    System.out.println();
-    //}
+    public void getInput(){
+        String category = null;
+        double price = 0;;
+        int people = 0;
+        try{
+            System.out.println("Please enter price: ");
+            price = sc.nextDouble();
+            System.out.println("Please enter number of people: ");
+            people = sc.nextInt();
+            sc.nextLine(); 
+            System.out.println("Please enter category: ");
+            category = sc.nextLine();
+        }catch(Exception e){
+            System.out.println("Please enter correct data!");
+        }
+        Productions e = new Productions(category,price,people);
+        System.out.println(calculate(e));
+        System.out.println();
+    }
 
     public void run(){
-        Scanner sc = new Scanner(System.in);
         boolean flag = true;
-        while (flag == true){
+        while (flag){
             System.out.println("1= Get Input; Other number = End");
+            int choose = 0;
             try{
-                int choose = sc.nextInt();
+                String temp = sc.nextLine();
+                choose = Integer.parseInt(temp);
                 if(choose == 1){
-                    Productions e = new Productions("food",1299.99,3);
-                    System.out.println(calculate(e));
+                   getInput();
                 }else{
                     flag = false;
-                    break;
                 }
             }catch(Exception e){
                 System.out.println("Need to enter integer number!");
-                run();
+                e.printStackTrace();
+                break;
             }
         }
         sc.close(); 
