@@ -1,12 +1,16 @@
 package Test_Part2;
-import java.util.Scanner;
 
+import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class PriceProblem{
     public static Scanner sc = new Scanner(System.in);
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+    public PriceProblem(){}
+
     public double calculate(Productions e){
-        double result = 0;
-        double type = 0;
+        double result;
+        double type;
         String category = e.getCategory();
 
         category = category.toLowerCase();
@@ -22,55 +26,53 @@ public class PriceProblem{
                 type = 1.02;
                 break;
             default:
-                type = 0;
+                type = 1;
                 break;
         }
         result = e.getPrice() * 1.05 * (type+ 0.012*Double.valueOf(e.getPeople()));
-        return result;
+        return Double.parseDouble(df.format(result));
     }
 
     public void getInput(){
         String category = null;
-        double price = 0;;
+        double price = 0;
         int people = 0;
         try{
             System.out.println("Please enter price: ");
             price = sc.nextDouble();
             System.out.println("Please enter number of people: ");
             people = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
             System.out.println("Please enter category: ");
             category = sc.nextLine();
         }catch(Exception e){
             System.out.println("Please enter correct data!");
         }
-        Productions e = new Productions(category,price,people);
+        Productions e = new Productions();
+        e.addProductions(category,price,people);
         System.out.println(calculate(e));
         System.out.println();
     }
 
-    public void run(){
+    public void run() {
         boolean flag = true;
-        while (flag){
+        while (flag) {
             System.out.println("1= Get Input; Other number = End");
-            int choose = 0;
-            try{
+            int choose;
+            try {
                 String temp = sc.nextLine();
                 choose = Integer.parseInt(temp);
-                if(choose == 1){
-                   getInput();
-                }else{
+                if (choose == 1) {
+                    getInput();
+                } else {
                     flag = false;
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Need to enter integer number!");
                 e.printStackTrace();
                 break;
             }
         }
-        sc.close(); 
-    }
-    public static void main(String args[]){
-        new PriceProblem().run();
+        sc.close();
     }
 }
